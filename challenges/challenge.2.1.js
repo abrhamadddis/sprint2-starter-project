@@ -19,9 +19,14 @@ import { Job, Candidate, Skill } from '../common/model.js';
  * @param {Date} endDate
  */
 const filterByDate = (jobs, startDate, endDate) => {
-  // ----- Challenge 2.1.1 - Complete the function here ---- //
+  const filterdJobs = [];
+  for ( let job of jobs){
+    if (job.startDate >= startDate && job.startDate <= endDate){
+      filterdJobs.push(job);
+    }
+  }
 
-  return [];
+  return filterdJobs;
 };
 
 /**
