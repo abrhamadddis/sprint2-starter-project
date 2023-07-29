@@ -55,8 +55,7 @@ const filterByBornAfter = (candidates, date) => {
  * @returns
  */
 const orderBySkills = (candidateList) => {
-  // ----- Challenge 2.1.3 - Complete the function here ---- //
-
+  candidateList = candidateList.sort((a, b) => b.skills.length - a.skills.length);
   return candidateList;
 };
 
