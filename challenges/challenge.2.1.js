@@ -80,7 +80,16 @@ const orderByWeightedSkills = (candidateList) => {
  */
 const genderRatio = (candidateList) => {
 
-  // ----- Challenge 2.1.5 - Complete the function here ---- //
+  let male, female, ratio = 0;
+  for(let candidate in candidateList){
+    if(candidate.gender === 'M'){
+      male ++;
+    }else{
+      female ++;
+    }
+  }
+  ratio = female/male;
+  return ratio;
 };
 
 /**
