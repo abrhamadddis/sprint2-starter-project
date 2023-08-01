@@ -29,9 +29,20 @@ import { Candidate } from '../common/model.js';
  * @returns String
  */
 const normalizedName = (name) => {
-  // ----- Challenge 2.2.1 - Complete the function here ---- //
-
-  return name;
+  let nameCaptalized = name.toUpperCase();
+  let charArray = [... nameCaptalized];
+  let noRedendent = []
+      for( let index = 0; index < charArray.length; index++){
+        if(charArray[index] !== charArray[index + 1]){
+          noRedendent.push((charArray[index]))
+        }
+      }
+  let firstElement = noRedendent[0]
+      noRedendent.shift()
+  const newArray = noRedendent.filter(x =>  x != 'A' && x != 'E' && x != 'U' && x != 'I' && x != '-' && x != '/' && x != ' ')
+  newArray.unshift(firstElement)
+  const toString = newArray.join('')
+  return toString;
 };
 
 /**
