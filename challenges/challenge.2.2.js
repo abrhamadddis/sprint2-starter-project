@@ -55,7 +55,16 @@ const normalizedName = (name) => {
  * @returns true or false
  */
 const areSimilarCandidates = (candidate1, candidate2) => {
-  // ----- Challenge 2.2.2 - Complete the function here ---- //
+  const c1Normalize = normalizedName(candidate1.name)
+  const c2Normalize = normalizedName(candidate2.name)
+  const yearDifference = Math.abs(candidate1.dateOfBirth.getYear() - candidate2.dateOfBirth.getYear())
+  const monthDifference = Math.abs(candidate1.dateOfBirth.getMonth() - candidate2.dateOfBirth.getMonth())
+  const dateDifference = Math.abs(candidate1.dateOfBirth.getDay() - candidate2.dateOfBirth.getDay())
+
+  if(c1Normalize === c2Normalize && dateDifference && dateDifference <= 10
+    && yearDifference == 0 && monthDifference == 0){
+    return true;
+  }
 
   return false;
 };
