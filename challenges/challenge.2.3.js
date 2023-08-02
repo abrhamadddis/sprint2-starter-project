@@ -33,9 +33,16 @@ const skillsMatch = (candidateSkill, jobSkill) => {
  * @param {Job} job
  */
 const suitableGender = (candidate, job) => {
-  // ----- Challenge 2.3.2 - Complete the function here ---- //
+  if(job.requiredGender == null){
+    return true;
+  }
+  else if(candidate.gender === job.requiredGender){
+    return true;
+  }
+
   return false;
 };
+
 
 /**
  *
