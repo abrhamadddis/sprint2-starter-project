@@ -40,7 +40,7 @@ const normalizedName = (name) => {
       }
   let firstElement = noRedendent[0]
       noRedendent.shift()
-  const newArray = noRedendent.filter(x =>  x != 'A' && x != 'E' && x != 'U' && x != 'I' && x != '')
+  const newArray = noRedendent.filter(x =>  x != 'A' && x != 'E' && x != 'U' && x != 'I' && x != 'O')
   newArray.unshift(firstElement)
   const toString = newArray.join('')
   return toString;
@@ -78,9 +78,14 @@ const areSimilarCandidates = (candidate1, candidate2) => {
  * @param {Array<Candidate>} candidateList
  */
 const possibleDuplicates = (newCandidate, candidateList) => {
-  // ------ Challenge 2.2.3 - Complete the function here ---- //
+    let similarCandidates = [];
+    for (let candidate in candidateList){
+      if (areSimilarCandidates(newCandidate, candidate) === 'true'){
+        similarCandidates.push(candidateList.candidate)
+      }
+    }
 
-  return [];
+  return similarCandidates;
 };
 
 /**
