@@ -33,7 +33,7 @@ const skillsMatch = (candidateSkill, jobSkill) => {
  * @param {Job} job
  */
 const suitableGender = (candidate, job) => {
-  if(job.requiredGender == null){
+  if(job.requiredGender == undefined){
     return true;
   }
   else if(candidate.gender === job.requiredGender){
@@ -57,9 +57,27 @@ const suitableGender = (candidate, job) => {
  * @returns String
  */
 const suitabilityScore = (candidate, job) => {
-  // ----- Challenge 2.3.3 - Complete the function here ---- //
+  let count1 = 0;
+  let count2 = 0;
+  if(candidate.gender == job.requiredGender || job.requiredGender == undefined){
+      count1 += 20;
+  }
+  for(let skill of candidate.skills){
+      for(let jobskill of job.requiredSkills){
+          if(skill.name === jobskill.name){
+              if(skill.level >= jobskill.level){
+                  count2++
+              }
+          }
+      }
+  }
+  console.log(count2)
+  let joblength = job.requiredSkills.length
+  let candidateSuitability = Math.round((count2/joblength) * 80) + count1
 
-  return 0;
+  return candidateSuitability;
+
+
 };
 
 /**
