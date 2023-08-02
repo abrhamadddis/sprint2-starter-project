@@ -18,8 +18,9 @@ import { Candidate, Job } from '../common/model.js';
  * @param {Skill} jobSkill
  */
 const skillsMatch = (candidateSkill, jobSkill) => {
-  // ----- Challenge 2.3.1 - Complete the function here ---- //
-
+  if(candidateSkill.name.toLowerCase() === jobSkill.name.toLowerCase() && candidateSkill.level >= jobSkill.level){
+    return true;
+}
   return false;
 };
 
