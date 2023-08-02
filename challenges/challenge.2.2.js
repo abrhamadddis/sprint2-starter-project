@@ -29,8 +29,9 @@ import { Candidate } from '../common/model.js';
  * @returns String
  */
 const normalizedName = (name) => {
-  let nameCaptalized = name.toUpperCase();
-  let charArray = [... nameCaptalized];
+      name = name.replace(/[^a-zA-Z]/gi, "")
+      name = name.toUpperCase();
+  let charArray = [... name];
   let noRedendent = []
       for( let index = 0; index < charArray.length; index++){
         if(charArray[index] !== charArray[index + 1]){
@@ -39,7 +40,7 @@ const normalizedName = (name) => {
       }
   let firstElement = noRedendent[0]
       noRedendent.shift()
-  const newArray = noRedendent.filter(x =>  x != 'A' && x != 'E' && x != 'U' && x != 'I' && x != '-' && x != '/' && x != ' ')
+  const newArray = noRedendent.filter(x =>  x != 'A' && x != 'E' && x != 'U' && x != 'I' && x != '')
   newArray.unshift(firstElement)
   const toString = newArray.join('')
   return toString;
