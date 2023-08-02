@@ -62,7 +62,7 @@ const areSimilarCandidates = (candidate1, candidate2) => {
   const monthDifference = Math.abs(candidate1.dateOfBirth.getMonth() - candidate2.dateOfBirth.getMonth())
   const dateDifference = Math.abs(candidate1.dateOfBirth.getDay() - candidate2.dateOfBirth.getDay())
 
-  if(c1Normalize === c2Normalize && dateDifference && dateDifference <= 10
+  if(c1Normalize === c2Normalize  && dateDifference <= 10
     && yearDifference == 0 && monthDifference == 0){
     return true;
   }
@@ -79,9 +79,9 @@ const areSimilarCandidates = (candidate1, candidate2) => {
  */
 const possibleDuplicates = (newCandidate, candidateList) => {
     let similarCandidates = [];
-    for (let candidate in candidateList){
+    for (let candidate of candidateList){
       if (areSimilarCandidates(newCandidate, candidate) === 'true'){
-        similarCandidates.push(candidateList.candidate)
+        similarCandidates.push(candidate)
       }
     }
 
