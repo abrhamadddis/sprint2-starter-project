@@ -39,7 +39,7 @@ const normalizedName = (name) => {
       }
   let firstElement = noRedendent[0]
       noRedendent.shift()
-  const newArray = noRedendent.filter(x =>  x != 'A' && x != 'E' && x != 'U' && x != 'I' && x != '-' && x != '/' && x != ' ')
+  const newArray = noRedendent.filter(x =>  x != 'A' && x != 'E' && x != 'U' && x != 'I' && x != 'O' && x != '-' && x != '/' && x != ' '  )
   newArray.unshift(firstElement)
   const toString = newArray.join('')
   return toString;
