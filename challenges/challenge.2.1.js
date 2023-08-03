@@ -127,7 +127,41 @@ const busiestMonth = (jobs) => {
  */
 const mostInDemandSkill = (jobs) => {
 
-  // ----- Challenge 2.1.7 - Complete the function here ---- //
+  let allSkill = []
+  const countedElement = [];
+  const checkedElement = new Set();
+  
+  for(let job of jobs){
+    for(let skill of job.skills){
+      allSkill.push(skill.name)
+    }
+  }
+
+  for (let element of allSkill) {
+    if (!checkedElement.has(element)) {
+      let count = 0;
+      for (let index of allSkill) {
+        if (index === element) {
+          count++;
+        }
+      }
+      countedElement.push({ element: element, count: count });
+      countedElements.add(element);
+    }
+  }
+
+  let maxCount = 0;
+  for (let obj of newArray) {
+  if (obj.count > maxCount) {
+    maxCount = obj.count;
+  }
+  }
+  const filteredArray = [];
+  for (let obj of newArray) {
+  if (obj.count === maxCount) {
+    filteredArray.push(obj);
+  } 
+  };
 
 };
 

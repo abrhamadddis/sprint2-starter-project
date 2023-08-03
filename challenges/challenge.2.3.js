@@ -64,7 +64,7 @@ const suitabilityScore = (candidate, job) => {
   }
   for(let skill of candidate.skills){
       for(let jobskill of job.requiredSkills){
-          if(skill.name === jobskill.name){
+          if(skill.name.toLowerCase() === jobskill.name.toLowerCase()){
               if(skill.level >= jobskill.level){
                   count2++
               }
@@ -91,16 +91,18 @@ const suitabilityScore = (candidate, job) => {
  * @returns number
  */
 const hottestCandidate = (candidates, jobs) => {
-  let hotCandidate = 0
+  let hotCandidate = []
   for(let candidate of candidates){
+    let count = 0
     for(let job of jobs){
       if(suitabilityScore(candidate, job) > 80){
-        hotCandidate += 1
+        count = count + 1;
       }
     }
+    hotCandidate.push(count)
   }
-
-  return hotCandidate;
+  let hottest = Math.max(...hotCandidate)
+  return hottest
 };
 
 export { skillsMatch, suitableGender, suitabilityScore, hottestCandidate };
