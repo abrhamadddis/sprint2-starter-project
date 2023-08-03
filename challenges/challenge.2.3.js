@@ -91,9 +91,16 @@ const suitabilityScore = (candidate, job) => {
  * @returns number
  */
 const hottestCandidate = (candidates, jobs) => {
-  // ----- Challenge 2.3.4 - Complete the function here ---- //
+  let hotCandidate = 0
+  for(let candidate of candidates){
+    for(let job of jobs){
+      if(suitabilityScore(candidate, job) > 80){
+        hotCandidate += 1
+      }
+    }
+  }
 
-  return 0;
+  return hotCandidate;
 };
 
 export { skillsMatch, suitableGender, suitabilityScore, hottestCandidate };
