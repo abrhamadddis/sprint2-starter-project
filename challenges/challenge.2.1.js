@@ -126,43 +126,42 @@ const busiestMonth = (jobs) => {
  * @param {Array<Job>} jobs
  */
 const mostInDemandSkill = (jobs) => {
-
   let allSkill = []
-  const countedElement = [];
-  const checkedElement = new Set();
+  let countedElement = [];
+  let checkedElement = [];
   
   for(let job of jobs){
-    for(let skill of job.skills){
+    for(let skill of job.requiredSkills){
       allSkill.push(skill.name)
     }
   }
-
+  console.log(allSkill)
   for (let element of allSkill) {
-    if (!checkedElement.has(element)) {
+    if (checkedElement.includes(element) === false) {
       let count = 0;
       for (let index of allSkill) {
-        if (index === element) {
+        if (index.toLowerCase() === element.toLowerCase()) {
           count++;
         }
       }
       countedElement.push({ element: element, count: count });
-      countedElements.add(element);
+      checkedElement.push(element);
     }
   }
-
+   console.log(countedElement)
   let maxCount = 0;
-  for (let obj of newArray) {
+  for (let obj of countedElement) {
   if (obj.count > maxCount) {
     maxCount = obj.count;
   }
   }
-  const filteredArray = [];
-  for (let obj of newArray) {
+  const mostDemand = [];
+  for (let obj of countedElement) {
   if (obj.count === maxCount) {
-    filteredArray.push(obj);
+    mostDemand.push(obj.element);
   } 
   };
-
+  return mostDemand;
 };
 
 export { filterByDate, filterByBornAfter, orderBySkills, orderByWeightedSkills, genderRatio, busiestMonth, mostInDemandSkill };
