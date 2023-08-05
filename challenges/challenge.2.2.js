@@ -104,8 +104,17 @@ const possibleDuplicates = (newCandidate, candidateList) => {
  * @returns
  */
 const candidateIndex = (candidateList) => {
-  // ------ Challenge 2.2.4 - Complete the function here ---- //
-  return 0;
+  let objCandidate = {}
+  for(let candidate in candidateList){
+    let norCandidate = normalizedName(candidateList[candidate].name)
+    if(norCandidate in objCandidate){
+      objCandidate[norCandidate].push(candidateList[candidate])
+    }
+    else{
+        objCandidate[norCandidate] = [candidateList[candidate]]
+    }
+  }
+  return objCandidate
 };
 
 /**
