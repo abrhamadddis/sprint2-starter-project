@@ -114,9 +114,38 @@ const genderRatio = (candidateList) => {
  * @returns number (0-11)
  */
 const busiestMonth = (jobs) => {
-  // ----- Challenge 2.1.6 - Complete the function here ---- //
-
-  return 0;
+  let allmonth = []
+  let countMonth = []
+  let checkedMonth = []
+  
+  for(let job of jobs){
+    allmonth.push(job.startDate.getMonth());
+  }
+  for(let element of allmonth){
+    if(!checkedMonth.includes(element)){
+      let count = 0
+      for(let index of allmonth){
+        if(index === element){
+          count++
+        }
+      }
+      countMonth.push({element:element, count:count});
+      checkedMonth.push(element);
+    }
+  }
+  let maxCount = 0
+  for (let obj of countMonth){
+    if(obj.count > maxCount){
+      maxCount = obj.count;
+    }
+  }
+  const busyMonth = []
+  for(let obj of countMonth){
+    if(obj.count === maxCount){
+      busyMonth.push(obj.element - 1)
+    }
+  };
+  return busyMonth;
 };
 
 /**
@@ -148,7 +177,7 @@ const mostInDemandSkill = (jobs) => {
       checkedElement.push(element);
     }
   }
-   console.log(countedElement)
+  
   let maxCount = 0;
   for (let obj of countedElement) {
   if (obj.count > maxCount) {
