@@ -128,8 +128,17 @@ const candidateIndex = (candidateList) => {
  * @returns
  */
 const duplicateCount = (candidateList) => {
-  // ------ Challenge 2.2.5 - Complete the function here ---- //
-  return 0;
+  let duplicateCount = 0;
+  const duplicated = [];
+  candidateList.forEach((candidate) => {
+    if (duplicated.includes(candidate) ||
+    possibleDuplicates(candidate, candidateList).length < 2) {
+      return;
+    }
+    duplicated.push(...possibleDuplicates(candidate, candidateList));
+    duplicateCount++;
+  });
+  return duplicateCount;
 };
 
 export { normalizedName, areSimilarCandidates, possibleDuplicates, duplicateCount, candidateIndex };
