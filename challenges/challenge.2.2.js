@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Candidate } from '../common/model.js';
+import { Candidate } from "../common/model.js";
 
 /**
  * Part 2: Duplicate Candidate Detection
@@ -29,20 +29,22 @@ import { Candidate } from '../common/model.js';
  * @returns String
  */
 const normalizedName = (name) => {
-      name = name.replace(/[^a-zA-Z]/gi, "")
-      name = name.toUpperCase();
-  let charArray = [... name];
-  let noRedendent = []
-      for( let index = 0; index < charArray.length; index++){
-        if(charArray[index] !== charArray[index + 1]){
-          noRedendent.push((charArray[index]))
-        }
-      }
-  let firstElement = noRedendent[0]
-      noRedendent.shift()
-  const newArray = noRedendent.filter(x =>  x != 'A' && x != 'E' && x != 'U' && x != 'I' && x != 'O')
-  newArray.unshift(firstElement)
-  const toString = newArray.join('')
+  name = name.replace(/[^a-zA-Z]/gi, "");
+  name = name.toUpperCase();
+  let charArray = [...name];
+  let noRedendent = [];
+  for (let index = 0; index < charArray.length; index++) {
+    if (charArray[index] !== charArray[index + 1]) {
+      noRedendent.push(charArray[index]);
+    }
+  }
+  let firstElement = noRedendent[0];
+  noRedendent.shift();
+  const newArray = noRedendent.filter(
+    (x) => x != "A" && x != "E" && x != "U" && x != "I" && x != "O"
+  );
+  newArray.unshift(firstElement);
+  const toString = newArray.join("");
   return toString;
 };
 
@@ -56,14 +58,12 @@ const normalizedName = (name) => {
  * @returns true or false
  */
 const areSimilarCandidates = (candidate1, candidate2) => {
-  const c1Normalize = normalizedName(candidate1.name)
-  const c2Normalize = normalizedName(candidate2.name)
-  const yearDifference = Math.abs(candidate1.dateOfBirth.getYear() - candidate2.dateOfBirth.getYear())
-  const monthDifference = Math.abs(candidate1.dateOfBirth.getMonth() - candidate2.dateOfBirth.getMonth())
-  const dateDifference = Math.abs(candidate1.dateOfBirth.getDay() - candidate2.dateOfBirth.getDay())
-
-  if(c1Normalize === c2Normalize  && dateDifference <= 10
-    && yearDifference == 0 && monthDifference == 0){
+  const c1Normalize = normalizedName(candidate1.name);
+  const c2Normalize = normalizedName(candidate2.name);
+  const dayDifference =
+    Math.abs(candidate1.dateOfBirth - candidate2.dateOfBirth) /
+    (24 * 60 * 60 * 1000);
+  if (c1Normalize === c2Normalize && dayDifference <= 10) {
     return true;
   }
 
@@ -78,12 +78,12 @@ const areSimilarCandidates = (candidate1, candidate2) => {
  * @param {Array<Candidate>} candidateList
  */
 const possibleDuplicates = (newCandidate, candidateList) => {
-    let similarCandidates = [];
-    for (let candidate of candidateList){
-      if (areSimilarCandidates(newCandidate, candidate) === 'true'){
-        similarCandidates.push(candidate)
-      }
+  let similarCandidates = [];
+  for (let candidate of candidateList) {
+    if (areSimilarCandidates(newCandidate, candidate) === "true") {
+      similarCandidates.push(candidate);
     }
+  }
 
   return similarCandidates;
 };
@@ -104,17 +104,16 @@ const possibleDuplicates = (newCandidate, candidateList) => {
  * @returns
  */
 const candidateIndex = (candidateList) => {
-  let objCandidate = {}
-  for(let candidate in candidateList){
-    let norCandidate = normalizedName(candidateList[candidate].name)
-    if(norCandidate in objCandidate){
-      objCandidate[norCandidate].push(candidateList[candidate])
-    }
-    else{
-        objCandidate[norCandidate] = [candidateList[candidate]]
+  let objCandidate = {};
+  for (let candidate in candidateList) {
+    let norCandidate = normalizedName(candidateList[candidate].name);
+    if (norCandidate in objCandidate) {
+      objCandidate[norCandidate].push(candidateList[candidate]);
+    } else {
+      objCandidate[norCandidate] = [candidateList[candidate]];
     }
   }
-  return objCandidate
+  return objCandidate;
 };
 
 /**
@@ -131,8 +130,10 @@ const duplicateCount = (candidateList) => {
   let duplicateCount = 0;
   const duplicated = [];
   candidateList.forEach((candidate) => {
-    if (duplicated.includes(candidate) ||
-    possibleDuplicates(candidate, candidateList).length < 2) {
+    if (
+      duplicated.includes(candidate) ||
+      possibleDuplicates(candidate, candidateList).length < 2
+    ) {
       return;
     }
     duplicated.push(...possibleDuplicates(candidate, candidateList));
@@ -141,4 +142,10 @@ const duplicateCount = (candidateList) => {
   return duplicateCount;
 };
 
-export { normalizedName, areSimilarCandidates, possibleDuplicates, duplicateCount, candidateIndex };
+export {
+  normalizedName,
+  areSimilarCandidates,
+  possibleDuplicates,
+  duplicateCount,
+  candidateIndex,
+};
