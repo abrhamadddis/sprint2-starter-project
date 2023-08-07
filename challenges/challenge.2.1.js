@@ -20,7 +20,7 @@ import { Job, Candidate, Skill } from "../common/model.js";
  */
 const filterByDate = (jobs, startDate, endDate) => {
   const filterdJobs = [];
-  for (let job of jobs) {
+  for (const job of jobs) {
     if (job.startDate >= startDate && job.startDate <= endDate) {
       filterdJobs.push(job);
     }
@@ -38,7 +38,7 @@ const filterByDate = (jobs, startDate, endDate) => {
  */
 const filterByBornAfter = (candidates, date) => {
   const filterdCandidates = [];
-  for (let candidate of candidates) {
+  for (const candidate of candidates) {
     if (candidate.dateOfBirth >= date) {
       filterdCandidates.push(candidate);
     }
@@ -70,14 +70,14 @@ const orderBySkills = (candidateList) => {
  * @returns
  */
 const orderByWeightedSkills = (candidateList) => {
-  for (let candidate of candidateList) {
-    for (let skill of candidate.skills) {
-      if (Skill.level === 0) {
-        Skill.level = 1;
-      } else if (Skill.level === 1) {
-        Skill.level = 5;
-      } else if (Skill.level === 2) {
-        Skill.level = 10;
+  for (const candidate of candidateList) {
+    for (const skill of candidate.skills) {
+      if (skill.level === 0) {
+        skill.level = 1;
+      } else if (skill.level === 1) {
+        skill.level = 5;
+      } else if (skill.level === 2) {
+        skill.level = 10;
       }
     }
   }
@@ -94,10 +94,10 @@ const orderByWeightedSkills = (candidateList) => {
  * @returns a floating point number indicating the ratio
  */
 const genderRatio = (candidateList) => {
-  let male,
-    female,
-    ratio = 0;
-  for (let candidate of candidateList) {
+  let male = 0;
+  let female = 0;
+  let ratio = 0;
+  for (const candidate of candidateList) {
     if (candidate.gender === "M") {
       male++;
     } else {
@@ -115,9 +115,9 @@ const genderRatio = (candidateList) => {
  * @returns number (0-11)
  */
 const busiestMonth = (jobs) => {
-  let allmonth = [];
-  let countMonth = [];
-  let checkedMonth = [];
+  const allmonth = [];
+  const countMonth = [];
+  const checkedMonth = [];
 
   for (let job of jobs) {
     allmonth.push(job.startDate.getMonth());
