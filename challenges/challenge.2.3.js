@@ -71,7 +71,6 @@ const suitabilityScore = (candidate, job) => {
           }
       }
   }
-  console.log(count2)
   let joblength = job.requiredSkills.length
   let candidateSuitability = Math.round((count2/joblength) * 80) + count1
 

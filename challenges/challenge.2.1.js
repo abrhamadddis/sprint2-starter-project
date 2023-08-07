@@ -70,7 +70,7 @@ const orderBySkills = (candidateList) => {
 const orderByWeightedSkills = (candidateList) => {
   for(let candidate of candidateList){
     for(let skill of candidate.skills){
-        if (Skill.level === 0){
+        if (skill.level === 0){
             Skill.level = 1
         }
         else if(Skill.level === 1 ){
