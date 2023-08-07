@@ -61,10 +61,9 @@ const suitabilityScore = (candidate, job) => {
   let count1 = 0;
   let count2 = 0;
   if (
-    candidate.gender == job.requiredGender ||
-    job.requiredGender == undefined
+    suitableGender(candidate, job) === true
   ) {
-    count1 += 20;
+    count1 =+ 20;
   }
   for (let skill of candidate.skills) {
     for (let jobskill of job.requiredSkills) {
