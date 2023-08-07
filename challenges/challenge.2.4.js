@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { Candidate } from '../common/model.js';
+import { Candidate } from "../common/model.js";
 
 /**
  * Part 4: Referals
@@ -24,8 +24,11 @@ import { Candidate } from '../common/model.js';
  */
 const totalBonuses = (candidate, initialBonus) => {
   // ----- Challenge 2.4.1 - Complete the function here ---- //
+  if (!candidate.recommendedBy) {
+    return 0;
+  }
 
-  return 0;
+  return initialBonus + totalBonuses(candidate.recommendedBy, initialBonus / 2);
 };
 
 export { totalBonuses };

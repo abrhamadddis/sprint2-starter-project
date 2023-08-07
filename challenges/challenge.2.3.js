@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { Candidate, Job } from '../common/model.js';
+import { Candidate, Job } from "../common/model.js";
 
 /**
  * Part 3: Job matching
@@ -18,9 +18,12 @@ import { Candidate, Job } from '../common/model.js';
  * @param {Skill} jobSkill
  */
 const skillsMatch = (candidateSkill, jobSkill) => {
-  if(candidateSkill.name.toLowerCase() === jobSkill.name.toLowerCase() && candidateSkill.level >= jobSkill.level){
+  if (
+    candidateSkill.name.toLowerCase() === jobSkill.name.toLowerCase() &&
+    candidateSkill.level >= jobSkill.level
+  ) {
     return true;
-}
+  }
   return false;
 };
 
@@ -33,16 +36,14 @@ const skillsMatch = (candidateSkill, jobSkill) => {
  * @param {Job} job
  */
 const suitableGender = (candidate, job) => {
-  if(job.requiredGender == undefined){
+  if (job.requiredGender == undefined) {
     return true;
-  }
-  else if(candidate.gender === job.requiredGender){
+  } else if (candidate.gender === job.requiredGender) {
     return true;
   }
 
   return false;
 };
-
 
 /**
  *
@@ -59,24 +60,25 @@ const suitableGender = (candidate, job) => {
 const suitabilityScore = (candidate, job) => {
   let count1 = 0;
   let count2 = 0;
-  if(candidate.gender == job.requiredGender || job.requiredGender == undefined){
-      count1 += 20;
+  if (
+    candidate.gender == job.requiredGender ||
+    job.requiredGender == undefined
+  ) {
+    count1 += 20;
   }
-  for(let skill of candidate.skills){
-      for(let jobskill of job.requiredSkills){
-          if(skill.name.toLowerCase() === jobskill.name.toLowerCase()){
-              if(skill.level >= jobskill.level){
-                  count2++
-              }
-          }
+  for (let skill of candidate.skills) {
+    for (let jobskill of job.requiredSkills) {
+      if (skill.name.toLowerCase() === jobskill.name.toLowerCase()) {
+        if (skill.level >= jobskill.level) {
+          count2++;
+        }
       }
+    }
   }
-  let joblength = job.requiredSkills.length
-  let candidateSuitability = Math.round((count2/joblength) * 80) + count1
+  let joblength = job.requiredSkills.length;
+  let candidateSuitability = Math.round((count2 / joblength) * 80) + count1;
 
   return candidateSuitability;
-
-
 };
 
 /**
@@ -90,18 +92,18 @@ const suitabilityScore = (candidate, job) => {
  * @returns number
  */
 const hottestCandidate = (candidates, jobs) => {
-  let hotCandidate = []
-  for(let candidate of candidates){
-    let count = 0
-    for(let job of jobs){
-      if(suitabilityScore(candidate, job) > 80){
+  let hotCandidate = [];
+  for (let candidate of candidates) {
+    let count = 0;
+    for (let job of jobs) {
+      if (suitabilityScore(candidate, job) > 80) {
         count = count + 1;
       }
     }
-    hotCandidate.push(count)
+    hotCandidate.push(count);
   }
-  let hottest = Math.max(...hotCandidate)
-  return hottest
+  let hottest = Math.max(...hotCandidate);
+  return hottest;
 };
 
 export { skillsMatch, suitableGender, suitabilityScore, hottestCandidate };
