@@ -139,7 +139,7 @@ const busiestMonth = (jobs) => {
   const busyMonth = [];
   for (let obj of countMonth) {
     if (obj.count === maxCount) {
-      busyMonth.push(obj.element - 1);
+      busyMonth.push(obj.element);
     }
   }
   return busyMonth;
