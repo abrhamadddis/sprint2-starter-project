@@ -80,7 +80,7 @@ const areSimilarCandidates = (candidate1, candidate2) => {
 const possibleDuplicates = (newCandidate, candidateList) => {
   let similarCandidates = [];
   for (let candidate of candidateList) {
-    if (areSimilarCandidates(newCandidate, candidate) === "true") {
+    if (areSimilarCandidates(newCandidate, candidate) === true) {
       similarCandidates.push(candidate);
     }
   }
