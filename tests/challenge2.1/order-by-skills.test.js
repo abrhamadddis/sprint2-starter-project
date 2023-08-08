@@ -17,7 +17,7 @@ test('Sort by skills test', () => {
 test('Sort by skills test', () => {
   expect(
     Utils.orderBySkills([c3, c2, c1]))
-    .toEqual(
+    .toEqual( 
       [c1, c2, c3]
     );
 });
