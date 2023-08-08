@@ -161,7 +161,6 @@ const mostInDemandSkill = (jobs) => {
       allSkill.push(skill.name);
     }
   }
-  console.log(allSkill);
   for (let element of allSkill) {
     if (checkedElement.includes(element) === false) {
       let count = 0;
