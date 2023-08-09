@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Candidate } from "../common/model.js";
+import { Candidate } from '../common/model.js';
 
 /**
  * Part 2: Duplicate Candidate Detection
@@ -29,22 +29,22 @@ import { Candidate } from "../common/model.js";
  * @returns String
  */
 const normalizedName = (name) => {
-  name = name.replace(/[^a-zA-Z]/gi, "");
+  name = name.replace(/[^a-zA-Z]/gi, '');
   name = name.toUpperCase();
-  let charArray = [...name];
-  let noRedendent = [];
+  const charArray = [...name];
+  const noRedendent = [];
   for (let index = 0; index < charArray.length; index++) {
     if (charArray[index] !== charArray[index + 1]) {
       noRedendent.push(charArray[index]);
     }
   }
-  let firstElement = noRedendent[0];
+  const firstElement = noRedendent[0];
   noRedendent.shift();
   const newArray = noRedendent.filter(
-    (x) => x != "A" && x != "E" && x != "U" && x != "I" && x != "O"
+    (x) => x !== 'A' && x !== 'E' && x !== 'U' && x !== 'I' && x !== 'O'
   );
   newArray.unshift(firstElement);
-  const toString = newArray.join("");
+  const toString = newArray.join('');
   return toString;
 };
 
@@ -78,8 +78,8 @@ const areSimilarCandidates = (candidate1, candidate2) => {
  * @param {Array<Candidate>} candidateList
  */
 const possibleDuplicates = (newCandidate, candidateList) => {
-  let similarCandidates = [];
-  for (let candidate of candidateList) {
+  const similarCandidates = [];
+  for (const candidate of candidateList) {
     if (areSimilarCandidates(newCandidate, candidate) === true) {
       similarCandidates.push(candidate);
     }
@@ -104,9 +104,9 @@ const possibleDuplicates = (newCandidate, candidateList) => {
  * @returns
  */
 const candidateIndex = (candidateList) => {
-  let objCandidate = {};
-  for (let candidate in candidateList) {
-    let norCandidate = normalizedName(candidateList[candidate].name);
+  const objCandidate = {};
+  for (const candidate in candidateList) {
+    const norCandidate = normalizedName(candidateList[candidate].name);
     if (norCandidate in objCandidate) {
       objCandidate[norCandidate].push(candidateList[candidate]);
     } else {
@@ -147,5 +147,5 @@ export {
   areSimilarCandidates,
   possibleDuplicates,
   duplicateCount,
-  candidateIndex,
+  candidateIndex
 };

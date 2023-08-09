@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { Candidate } from "../common/model.js";
+import { Candidate } from '../common/model.js';
 
 /**
  * Part 4: Referals

@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { Candidate, Job } from "../common/model.js";
+import { Candidate, Job } from '../common/model.js';
 
 /**
  * Part 3: Job matching
@@ -36,7 +36,7 @@ const skillsMatch = (candidateSkill, jobSkill) => {
  * @param {Job} job
  */
 const suitableGender = (candidate, job) => {
-  if (job.requiredGender == undefined) {
+  if (job.requiredGender === undefined) {
     return true;
   } else if (candidate.gender === job.requiredGender) {
     return true;
@@ -63,10 +63,10 @@ const suitabilityScore = (candidate, job) => {
   if (
     suitableGender(candidate, job) === true
   ) {
-    count1 =+ 20;
+    count1 = +20;
   }
-  for (let skill of candidate.skills) {
-    for (let jobskill of job.requiredSkills) {
+  for (const skill of candidate.skills) {
+    for (const jobskill of job.requiredSkills) {
       if (skill.name.toLowerCase() === jobskill.name.toLowerCase()) {
         if (skill.level >= jobskill.level) {
           count2++;
@@ -74,8 +74,8 @@ const suitabilityScore = (candidate, job) => {
       }
     }
   }
-  let joblength = job.requiredSkills.length;
-  let candidateSuitability = Math.round((count2 / joblength) * 80) + count1;
+  const joblength = job.requiredSkills.length;
+  const candidateSuitability = Math.round((count2 / joblength) * 80) + count1;
 
   return candidateSuitability;
 };
@@ -91,17 +91,17 @@ const suitabilityScore = (candidate, job) => {
  * @returns number
  */
 const hottestCandidate = (candidates, jobs) => {
-  let hotCandidate = [];
-  for (let candidate of candidates) {
+  const hotCandidate = [];
+  for (const candidate of candidates) {
     let count = 0;
-    for (let job of jobs) {
+    for (const job of jobs) {
       if (suitabilityScore(candidate, job) > 80) {
         count = count + 1;
       }
     }
     hotCandidate.push(count);
   }
-  let hottest = Math.max(...hotCandidate);
+  const hottest = Math.max(...hotCandidate);
   return hottest;
 };
 

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Job, Candidate, Skill } from "../common/model.js";
+import { Job, Candidate, Skill } from '../common/model.js';
 
 /**
  * Part 1: Basic utility functions.
@@ -94,7 +94,7 @@ const genderRatio = (candidateList) => {
   let female = 0;
   let ratio = 0;
   for (const candidate of candidateList) {
-    if (candidate.gender === "M") {
+    if (candidate.gender === 'M') {
       male++;
     } else {
       female++;
@@ -115,29 +115,29 @@ const busiestMonth = (jobs) => {
   const countMonth = [];
   const checkedMonth = [];
 
-  for (let job of jobs) {
+  for (const job of jobs) {
     allmonth.push(job.startDate.getMonth());
   }
-  for (let element of allmonth) {
+  for (const element of allmonth) {
     if (!checkedMonth.includes(element)) {
       let count = 0;
-      for (let index of allmonth) {
+      for (const index of allmonth) {
         if (index === element) {
           count++;
         }
       }
-      countMonth.push({ element: element, count: count });
+      countMonth.push({ element, count });
       checkedMonth.push(element);
     }
   }
   let maxCount = 0;
-  for (let obj of countMonth) {
+  for (const obj of countMonth) {
     if (obj.count > maxCount) {
       maxCount = obj.count;
     }
   }
   const busyMonth = [];
-  for (let obj of countMonth) {
+  for (const obj of countMonth) {
     if (obj.count === maxCount) {
       busyMonth.push(obj.element);
     }
@@ -152,36 +152,36 @@ const busiestMonth = (jobs) => {
  * @param {Array<Job>} jobs
  */
 const mostInDemandSkill = (jobs) => {
-  let allSkill = [];
-  let countedElement = [];
-  let checkedElement = [];
+  const allSkill = [];
+  const countedElement = [];
+  const checkedElement = [];
 
-  for (let job of jobs) {
-    for (let skill of job.requiredSkills) {
+  for (const job of jobs) {
+    for (const skill of job.requiredSkills) {
       allSkill.push(skill.name);
     }
   }
-  for (let element of allSkill) {
+  for (const element of allSkill) {
     if (checkedElement.includes(element) === false) {
       let count = 0;
-      for (let index of allSkill) {
+      for (const index of allSkill) {
         if (index.toLowerCase() === element.toLowerCase()) {
           count++;
         }
       }
-      countedElement.push({ element: element, count: count });
+      countedElement.push({ element, count });
       checkedElement.push(element);
     }
   }
 
   let maxCount = 0;
-  for (let obj of countedElement) {
+  for (const obj of countedElement) {
     if (obj.count > maxCount) {
       maxCount = obj.count;
     }
   }
   const mostDemand = [];
-  for (let obj of countedElement) {
+  for (const obj of countedElement) {
     if (obj.count === maxCount) {
       mostDemand.push(obj.element);
     }
@@ -196,5 +196,5 @@ export {
   orderByWeightedSkills,
   genderRatio,
   busiestMonth,
-  mostInDemandSkill,
+  mostInDemandSkill
 };
