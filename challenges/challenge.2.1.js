@@ -19,9 +19,14 @@ import { Job, Candidate, Skill } from '../common/model.js';
  * @param {Date} endDate
  */
 const filterByDate = (jobs, startDate, endDate) => {
-  // ----- Challenge 2.1.1 - Complete the function here ---- //
+  const filterdJobs = [];
+  for (const job of jobs) {
+    if (job.startDate >= startDate && job.startDate <= endDate) {
+      filterdJobs.push(job);
+    }
+  }
 
-  return [];
+  return filterdJobs;
 };
 
 /**
@@ -32,9 +37,14 @@ const filterByDate = (jobs, startDate, endDate) => {
  * @param {Date} date
  */
 const filterByBornAfter = (candidates, date) => {
-  // ----- Challenge 2.1.2 - Complete the function here ---- //
+  const filterdCandidates = [];
+  for (const candidate of candidates) {
+    if (candidate.dateOfBirth >= date) {
+      filterdCandidates.push(candidate);
+    }
+  }
 
-  return [];
+  return filterdCandidates;
 };
 
 /**
@@ -45,8 +55,9 @@ const filterByBornAfter = (candidates, date) => {
  * @returns
  */
 const orderBySkills = (candidateList) => {
-  // ----- Challenge 2.1.3 - Complete the function here ---- //
-
+  candidateList = candidateList.sort(
+    (a, b) => b.skills.length - a.skills.length
+  );
   return candidateList;
 };
 
@@ -59,9 +70,18 @@ const orderBySkills = (candidateList) => {
  * @returns
  */
 const orderByWeightedSkills = (candidateList) => {
-  // ----- Challenge 2.1.4 - Complete the function here ---- //
-
-  return candidateList;
+  candidateList.forEach(candidate => {
+    candidate.totalPoints = candidate.skills.reduce((sum, skill) => {
+      if (skill.level === 2) {
+        return sum + 10;
+      } else if (skill.level === 1) {
+        return sum + 5;
+      } else {
+        return sum + 1;
+      }
+    }, 0);
+  });
+  return candidateList.sort((a, b) => b.totalPoints - a.totalPoints);
 };
 
 /**
@@ -70,8 +90,18 @@ const orderByWeightedSkills = (candidateList) => {
  * @returns a floating point number indicating the ratio
  */
 const genderRatio = (candidateList) => {
-
-  // ----- Challenge 2.1.5 - Complete the function here ---- //
+  let male = 0;
+  let female = 0;
+  let ratio = 0;
+  for (const candidate of candidateList) {
+    if (candidate.gender === 'M') {
+      male++;
+    } else {
+      female++;
+    }
+  }
+  ratio = female / male;
+  return ratio;
 };
 
 /**
@@ -81,9 +111,38 @@ const genderRatio = (candidateList) => {
  * @returns number (0-11)
  */
 const busiestMonth = (jobs) => {
-  // ----- Challenge 2.1.6 - Complete the function here ---- //
+  const allmonth = [];
+  const countMonth = [];
+  const checkedMonth = [];
 
-  return 0;
+  for (const job of jobs) {
+    allmonth.push(job.startDate.getMonth());
+  }
+  for (const element of allmonth) {
+    if (!checkedMonth.includes(element)) {
+      let count = 0;
+      for (const index of allmonth) {
+        if (index === element) {
+          count++;
+        }
+      }
+      countMonth.push({ element, count });
+      checkedMonth.push(element);
+    }
+  }
+  let maxCount = 0;
+  for (const obj of countMonth) {
+    if (obj.count > maxCount) {
+      maxCount = obj.count;
+    }
+  }
+  const busyMonth = [];
+  for (const obj of countMonth) {
+    if (obj.count === maxCount) {
+      busyMonth.push(obj.element);
+    }
+  }
+  return busyMonth;
 };
 
 /**
@@ -93,9 +152,49 @@ const busiestMonth = (jobs) => {
  * @param {Array<Job>} jobs
  */
 const mostInDemandSkill = (jobs) => {
+  const allSkill = [];
+  const countedElement = [];
+  const checkedElement = [];
 
-  // ----- Challenge 2.1.7 - Complete the function here ---- //
+  for (const job of jobs) {
+    for (const skill of job.requiredSkills) {
+      allSkill.push(skill.name);
+    }
+  }
+  for (const element of allSkill) {
+    if (checkedElement.includes(element) === false) {
+      let count = 0;
+      for (const index of allSkill) {
+        if (index.toLowerCase() === element.toLowerCase()) {
+          count++;
+        }
+      }
+      countedElement.push({ element, count });
+      checkedElement.push(element);
+    }
+  }
 
+  let maxCount = 0;
+  for (const obj of countedElement) {
+    if (obj.count > maxCount) {
+      maxCount = obj.count;
+    }
+  }
+  const mostDemand = [];
+  for (const obj of countedElement) {
+    if (obj.count === maxCount) {
+      mostDemand.push(obj.element);
+    }
+  }
+  return mostDemand;
 };
 
-export { filterByDate, filterByBornAfter, orderBySkills, orderByWeightedSkills, genderRatio, busiestMonth, mostInDemandSkill };
+export {
+  filterByDate,
+  filterByBornAfter,
+  orderBySkills,
+  orderByWeightedSkills,
+  genderRatio,
+  busiestMonth,
+  mostInDemandSkill
+};

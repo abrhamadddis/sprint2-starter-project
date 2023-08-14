@@ -6,33 +6,25 @@ const c1 = new Candidate('C1', new Date(2010, 1, 1), [new Skill('S1'), new Skill
 const c2 = new Candidate('C2', new Date(2011, 1, 1), [new Skill('S1', 1), new Skill('S2', 2)]);
 const c3 = new Candidate('C3', new Date(2012, 1, 1), [new Skill('S1', 2)]);
 
-test('Sort by skills test', () => {
+test('Order by weighted skill', () => {
   expect(
-    Utils.orderBySkills([c1, c2, c3]))
+    Utils.orderByWeightedSkills([c1, c2, c3]))
     .toEqual(
-      [c1, c2, c3]
+      [c2, c3, c1]
     );
 });
 
-test('Sort by skills test', () => {
+test('Order by weighted skill', () => {
   expect(
-    Utils.orderBySkills([c3, c2, c1]))
-    .toEqual( 
-      [c1, c2, c3]
-    );
-});
-
-test('Sort by skills test', () => {
-  expect(
-    Utils.orderBySkills([c2, c3, c1]))
+    Utils.orderByWeightedSkills([c1, c2]))
     .toEqual(
-      [c1, c2, c3]
+      [c2, c1]
     );
 });
 
-test('Sort by skills test', () => {
+test('Order by weighted skill', () => {
   expect(
-    Utils.orderBySkills([c3, c2]))
+    Utils.orderByWeightedSkills([c2, c3]))
     .toEqual(
       [c2, c3]
     );

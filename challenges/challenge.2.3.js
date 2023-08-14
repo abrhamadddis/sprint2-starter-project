@@ -18,8 +18,12 @@ import { Candidate, Job } from '../common/model.js';
  * @param {Skill} jobSkill
  */
 const skillsMatch = (candidateSkill, jobSkill) => {
-  // ----- Challenge 2.3.1 - Complete the function here ---- //
-
+  if (
+    candidateSkill.name.toLowerCase() === jobSkill.name.toLowerCase() &&
+    candidateSkill.level >= jobSkill.level
+  ) {
+    return true;
+  }
   return false;
 };
 
@@ -32,7 +36,12 @@ const skillsMatch = (candidateSkill, jobSkill) => {
  * @param {Job} job
  */
 const suitableGender = (candidate, job) => {
-  // ----- Challenge 2.3.2 - Complete the function here ---- //
+  if (job.requiredGender === undefined) {
+    return true;
+  } else if (candidate.gender === job.requiredGender) {
+    return true;
+  }
+
   return false;
 };
 
@@ -49,9 +58,26 @@ const suitableGender = (candidate, job) => {
  * @returns String
  */
 const suitabilityScore = (candidate, job) => {
-  // ----- Challenge 2.3.3 - Complete the function here ---- //
+  let count1 = 0;
+  let count2 = 0;
+  if (
+    suitableGender(candidate, job) === true
+  ) {
+    count1 = +20;
+  }
+  for (const skill of candidate.skills) {
+    for (const jobskill of job.requiredSkills) {
+      if (skill.name.toLowerCase() === jobskill.name.toLowerCase()) {
+        if (skill.level >= jobskill.level) {
+          count2++;
+        }
+      }
+    }
+  }
+  const joblength = job.requiredSkills.length;
+  const candidateSuitability = Math.round((count2 / joblength) * 80) + count1;
 
-  return 0;
+  return candidateSuitability;
 };
 
 /**
@@ -65,9 +91,18 @@ const suitabilityScore = (candidate, job) => {
  * @returns number
  */
 const hottestCandidate = (candidates, jobs) => {
-  // ----- Challenge 2.3.4 - Complete the function here ---- //
-
-  return 0;
+  const hotCandidate = [];
+  for (const candidate of candidates) {
+    let count = 0;
+    for (const job of jobs) {
+      if (suitabilityScore(candidate, job) > 80) {
+        count = count + 1;
+      }
+    }
+    hotCandidate.push(count);
+  }
+  const hottest = Math.max(...hotCandidate);
+  return hottest;
 };
 
 export { skillsMatch, suitableGender, suitabilityScore, hottestCandidate };
